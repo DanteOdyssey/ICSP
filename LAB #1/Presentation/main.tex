@@ -265,4 +265,36 @@
 \end{columns}
 \end{frame}
 
+% ---------- 10. Limited op-amp gain effects ----------
+\begin{frame}{Limited OPAMP gain effects}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.66\textwidth}
+  \alignednoiseplot{figs/Vod_different_opamp_gains.png}
+\end{column}
+\begin{column}{0.32\textwidth}
+  \small
+  \begin{itemize}\setlength\itemsep{3mm}
+    \item Reducing the gain causes a drop before the edge, pushing the response outside the specifications.
+    \item Tested gains: 100, 1k, and 10k.
+  \end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ---------- 11. Limited op-amp bandwidth effects ----------
+\begin{frame}{Limited OPAMP bandwidth effects}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.66\textwidth}
+  \alignednoiseplot{figs/Vod_different_opamp_GBW.png}
+\end{column}
+\begin{column}{0.32\textwidth}
+  \small
+  \begin{itemize}\setlength\itemsep{3mm}
+    \item Reducing the bandwidth creates a higher peak at the pass-band limit.
+    \item Tested bandwidths: 100 MHz, 1 GHz, and 10 GHz.
+  \end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
 \end{document}

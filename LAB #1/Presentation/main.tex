@@ -208,7 +208,7 @@
 \end{frame}
 
 
-% ---------- Additional biquad and noise analysis slides ----------
+% ---------- 6. First biquad: transfer function (MATLAB) ----------
 \begin{frame}{First biquad: transfer function (MATLAB)}
 \begin{columns}[T]
 \begin{column}{0.38\textwidth}
@@ -219,7 +219,7 @@ $f_0$ & $Q$ & $f_z$ & $k_0$ \\
 0.637 MHz & 0.72 & 5.115 MHz & 1.00 \\
 \end{tabular}
 \end{block}
-\vspace{1mm}
+\vspace{4mm}
 \begin{itemize}\setlength\itemsep{1mm}\small
 \item Low $Q$: no peaking, flat at 0 dB at low frequency
 \item Zero at 5.1 MHz: deep notch, then $-36$ dB at high frequency
@@ -232,6 +232,7 @@ $f_0$ & $Q$ & $f_z$ & $k_0$ \\
 \rightplot{figs/Biquad_tf_1.png}
 \end{frame}
 
+% ---------- 7. First biquad: circuit in Virtuoso ----------
 \begin{frame}{First biquad: circuit in Virtuoso}
 \begin{columns}[T]
 \begin{column}{0.38\textwidth}
@@ -247,6 +248,7 @@ $f_0$ & $Q$ & $f_z$ & $k_0$ \\
 \rightplot{figs/biquad1_schematic_transparent.png}
 \end{frame}
 
+% ---------- 8. First biquad: Virtuoso, real components ----------
 \begin{frame}{First biquad: Virtuoso, real components}
 \begin{columns}[T]
 \begin{column}{0.38\textwidth}
@@ -274,6 +276,7 @@ Gain at 1 MHz [dB] & $-8.7$ & $\approx -8.7$ \\
 \rightplot{figs/Vod_biquad1_with_markers.png}
 \end{frame}
 
+% ---------- 9. Second biquad: transfer function (MATLAB) ----------
 \begin{frame}{Second biquad: transfer function (MATLAB)}
 \begin{columns}[T]
 \begin{column}{0.38\textwidth}
@@ -284,7 +287,7 @@ $f_0$ & $Q$ & $f_z$ & $k_0$ \\
 1.031 MHz & 3.38 & 2.219 MHz & 0.944 \\
 \end{tabular}
 \end{block}
-\vspace{1mm}
+\vspace{3mm}
 \begin{itemize}\setlength\itemsep{1mm}\small
 \item High $Q$: peak of $+8.2$ dB at 1.0 MHz, right at the pass band edge
 \item It compensates the $-8.7$ dB of biquad 1 at 1 MHz: the cascade stays within $-0.5$ dB
@@ -297,6 +300,7 @@ $f_0$ & $Q$ & $f_z$ & $k_0$ \\
 \rightplot{figs/Biquad_tf_2.png}
 \end{frame}
 
+% ---------- 10. Second biquad: circuit in Virtuoso ----------
 \begin{frame}{Second biquad: circuit in Virtuoso}
 \begin{columns}[T]
 \begin{column}{0.38\textwidth}
@@ -312,6 +316,7 @@ $f_0$ & $Q$ & $f_z$ & $k_0$ \\
 \rightplot{figs/biquad2_schematic_transparent.png}
 \end{frame}
 
+% ---------- 11. Second biquad: Virtuoso, real components ----------
 \begin{frame}{Second biquad: Virtuoso, real components}
 \begin{columns}[T]
 \begin{column}{0.38\textwidth}
@@ -339,7 +344,7 @@ Gain at 1 MHz [dB] & $+8.2$ & $+8.2$ \\
 \rightplot{figs/Vod_biquad2_with_markers.png}
 \end{frame}
 
-% ---------- 6. Noise power spectral density ----------
+% ---------- 12. Noise power spectral density ----------
 \begin{frame}{Power Spectral Density of Noise}
 \noindent\makebox[\textwidth][c]{%
 \begin{minipage}[t]{0.49\paperwidth}
@@ -361,7 +366,7 @@ Gain at 1 MHz [dB] & $+8.2$ & $+8.2$ \\
 \end{itemize}
 \end{frame}
 
-% ---------- 7. Integrated noise power ----------
+% ---------- 13. Integrated noise power ----------
 \begin{frame}{Integrated Noise Power}
 \noindent\makebox[\textwidth][c]{%
 \begin{minipage}[t]{0.49\paperwidth}
@@ -383,6 +388,7 @@ Gain at 1 MHz [dB] & $+8.2$ & $+8.2$ \\
 \end{itemize}
 \end{frame}
 
+% ---------- 14. Noise analysis (MATLAB) ----------
 \begin{frame}{Noise analysis (MATLAB)}
 \begin{columns}[T]
 \begin{column}{0.42\textwidth}
@@ -411,7 +417,7 @@ Filter (rms sum) & \multicolumn{5}{c}{119.5} \\
 \end{frame}
 
 
-% ---------- 8. Transient response at 100 kHz ----------
+% ---------- 15. Transient response at 100 kHz ----------
 \begin{frame}{Transient Response 100 kHz}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.32\textwidth}
@@ -429,7 +435,7 @@ Filter (rms sum) & \multicolumn{5}{c}{119.5} \\
 \end{columns}
 \end{frame}
 
-% ---------- 9. Transient response at 1 MHz ----------
+% ---------- 16. Transient response at 1 MHz ----------
 \begin{frame}{Transient Response 1 MHz}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.32\textwidth}
@@ -446,7 +452,7 @@ Filter (rms sum) & \multicolumn{5}{c}{119.5} \\
 \end{columns}
 \end{frame}
 
-% ---------- 10. Limited op-amp gain effects ----------
+% ---------- 17. Limited op-amp gain effects ----------
 \begin{frame}{Limited OPAMP gain effects}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.32\textwidth}
@@ -462,7 +468,7 @@ Filter (rms sum) & \multicolumn{5}{c}{119.5} \\
 \end{columns}
 \end{frame}
 
-% ---------- 11. Limited op-amp bandwidth effects ----------
+% ---------- 18. Limited op-amp bandwidth effects ----------
 \begin{frame}{Limited OPAMP bandwidth effects}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.32\textwidth}

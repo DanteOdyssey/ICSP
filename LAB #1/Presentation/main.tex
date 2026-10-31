@@ -35,6 +35,11 @@
     \node[anchor=north,inner sep=0] at ([xshift=0.333\paperwidth,yshift=-0.37\paperheight]current page.north west)
       {\includegraphics[width=0.60\paperwidth]{#1}};
   \end{tikzpicture}}
+\newcommand{\rightplot}[1]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[inner sep=0] at ([xshift=110.5mm,yshift=36mm]current page.south west)
+      {\includegraphics[width=91mm,height=56mm,keepaspectratio]{#1}};
+  \end{tikzpicture}}
 
 \newcommand{\figorbox}[4]{% file, width, height, caption if the file is missing
   \IfFileExists{#1}{\includegraphics[width=#2]{#1}}{%
@@ -197,38 +202,209 @@
 \end{columns}
 \end{frame}
 
-% ---------- 6. Noise power spectral density ----------
-\begin{frame}{Power Spectral Density of Noise}
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.66\textwidth}
-  \alignednoiseplot{figs/output_noise_power_TF.png}
+
+% ---------- Additional biquad and noise analysis slides ----------
+\begin{frame}{First biquad: transfer function (MATLAB)}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\begin{block}{Parameters}
+\centering\footnotesize
+\begin{tabular}{@{}cccc@{}}
+$f_0$ & $Q$ & $f_z$ & $k_0$ \\
+0.637 MHz & 0.72 & 5.115 MHz & 1.00 \\
+\end{tabular}
+\end{block}
+\vspace{1mm}
+\begin{itemize}\setlength\itemsep{1mm}\small
+\item Low $Q$: no peaking, flat at 0 dB at low frequency
+\item Zero at 5.1 MHz: deep notch, then $-36$ dB at high frequency
+\item It attenuates the upper part of the pass band: $-8.7$ dB at 1 MHz, recovered by biquad 2
+\end{itemize}
 \end{column}
-\begin{column}{0.32\textwidth}
-  \small
-  \begin{itemize}\setlength\itemsep{3mm}
-    \item The plotted PSD is integrated from 1 Hz to 10 GHz to obtain the noise power of interest.
-    \item The total PSD is the sum of the contributions from the resistor noise sources, each weighted by its corresponding transfer function.
-  \end{itemize}
+\begin{column}{0.60\textwidth}
 \end{column}
 \end{columns}
+\rightplot{figs/Biquad_tf_1.png}
+\end{frame}
+
+\begin{frame}{First biquad: circuit in Virtuoso}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\textbf{\footnotesize Circuit}
+\begin{itemize}\setlength\itemsep{1mm}\small
+\item Two fully differential integrators with the ideal amplifier model
+\item MIM capacitors and RNHR1000 poly resistors (umc13mmrf)
+\end{itemize}
+\end{column}
+\begin{column}{0.60\textwidth}
+\end{column}
+\end{columns}
+\rightplot{figs/biquad1_schematic_transparent.png}
+\end{frame}
+
+\begin{frame}{First biquad: Virtuoso, real components}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\textbf{\footnotesize Test bench}
+\begin{itemize}\setlength\itemsep{1mm}\small
+\item Same amplifier model, with MIM capacitors and RNHR1000 poly resistors (umc13mmrf)
+\end{itemize}
+\vspace{1mm}
+\centering\footnotesize\setlength\tabcolsep{3pt}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+& MATLAB & Virtuoso \\
+\midrule
+$f_0$ [MHz] & 0.637 & 0.637 \\
+$f_z$ [MHz] & 5.115 & 5.129 \\
+DC gain [dB] & 0.0 & 0.0 \\
+HF gain [dB] & $-36.2$ & $\approx -36.2$ \\
+Gain at 1 MHz [dB] & $-8.7$ & $\approx -8.7$ \\
+\bottomrule
+\end{tabular}
+\end{column}
+\begin{column}{0.60\textwidth}
+\end{column}
+\end{columns}
+\rightplot{figs/Vod_biquad1_with_markers.png}
+\end{frame}
+
+\begin{frame}{Second biquad: transfer function (MATLAB)}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\begin{block}{Parameters}
+\centering\footnotesize
+\begin{tabular}{@{}cccc@{}}
+$f_0$ & $Q$ & $f_z$ & $k_0$ \\
+1.031 MHz & 3.38 & 2.219 MHz & 0.944 \\
+\end{tabular}
+\end{block}
+\vspace{1mm}
+\begin{itemize}\setlength\itemsep{1mm}\small
+\item High $Q$: peak of $+8.2$ dB at 1.0 MHz, right at the pass band edge
+\item It compensates the $-8.7$ dB of biquad 1 at 1 MHz: the cascade stays within $-0.5$ dB
+\item DC gain $-0.5$ dB ($k_0=0.944$) and zero at 2.2 MHz, the closest to the pass band
+\end{itemize}
+\end{column}
+\begin{column}{0.60\textwidth}
+\end{column}
+\end{columns}
+\rightplot{figs/Biquad_tf_2.png}
+\end{frame}
+
+\begin{frame}{Second biquad: circuit in Virtuoso}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\textbf{\footnotesize Circuit}
+\begin{itemize}\setlength\itemsep{1mm}\small
+\item Same structure as biquad 1, with the values of the second pair of poles and zeros
+\item MIM capacitors and RNHR1000 poly resistors (umc13mmrf)
+\end{itemize}
+\end{column}
+\begin{column}{0.60\textwidth}
+\end{column}
+\end{columns}
+\rightplot{figs/biquad2_schematic_transparent.png}
+\end{frame}
+
+\begin{frame}{Second biquad: Virtuoso, real components}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\textbf{\footnotesize Test bench}
+\begin{itemize}\setlength\itemsep{1mm}\small
+\item Same amplifier model, with MIM capacitors and RNHR1000 poly resistors (umc13mmrf)
+\end{itemize}
+\vspace{1mm}
+\centering\footnotesize\setlength\tabcolsep{3pt}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+& MATLAB & Virtuoso \\
+\midrule
+$f_0$ [MHz] & 1.031 & 1.031 \\
+$f_z$ [MHz] & 2.219 & 2.239 \\
+DC gain [dB] & $-0.5$ & $\approx -0.5$ \\
+HF gain [dB] & $-13.8$ & $\approx -13.7$ \\
+Gain at 1 MHz [dB] & $+8.2$ & $+8.2$ \\
+\bottomrule
+\end{tabular}
+\end{column}
+\begin{column}{0.60\textwidth}
+\end{column}
+\end{columns}
+\rightplot{figs/Vod_biquad2_with_markers.png}
+\end{frame}
+
+% ---------- 6. Noise power spectral density ----------
+\begin{frame}{Power Spectral Density of Noise}
+\noindent\makebox[\textwidth][c]{%
+\begin{minipage}[t]{0.49\paperwidth}
+  \centering
+  \small\textbf{$C = 4.6\,\mathrm{pF}$}\par
+  \includegraphics[width=\linewidth,keepaspectratio]{figs/output_noise_PSD_4.6pF.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\paperwidth}
+  \centering
+  \small\textbf{$C = 9.2\,\mathrm{pF}$}\par
+  \includegraphics[width=\linewidth,keepaspectratio]{figs/output_noise_PSD_9.2pF.png}
+\end{minipage}%
+}
+\vspace{1mm}
+\small
+\begin{itemize}\setlength\itemsep{1mm}
+  \item The PSD sums resistor-noise contributions weighted by their transfer functions.
+  \item Integrating from 1 Hz to 10 GHz gives the noise power of interest.
+\end{itemize}
 \end{frame}
 
 % ---------- 7. Integrated noise power ----------
 \begin{frame}{Integrated Noise Power}
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.66\textwidth}
-  \alignednoiseplot{figs/output_noise_power_integral.png}
+\noindent\makebox[\textwidth][c]{%
+\begin{minipage}[t]{0.49\paperwidth}
+  \centering
+  \small\textbf{$C = 4.6\,\mathrm{pF}$}\par
+  \includegraphics[width=\linewidth,keepaspectratio]{figs/output_noise_integral_4.6pF.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\paperwidth}
+  \centering
+  \small\textbf{$C = 9.2\,\mathrm{pF}$}\par
+  \includegraphics[width=\linewidth,keepaspectratio]{figs/output_noise_integral_9.2pF.png}
+\end{minipage}%
+}
+\vspace{1mm}
+\small
+\begin{itemize}\setlength\itemsep{1mm}
+  \item RMS noise is the square root of the integrated noise power.
+  \item Doubling the capacitance reduces the initial noise to the target; the final output is $119.4\ \mu$V$_{\rm rms}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Noise analysis (MATLAB)}
+\begin{columns}[T]
+\begin{column}{0.42\textwidth}
+\begin{itemize}\setlength\itemsep{1mm}\footnotesize
+  \item Thermal noise of each resistor, $4kTR$ ($T=300$ K), $\times 2$ for the fully differential structure
+  \item Referred to the filter output through the noise transfer function and the following biquad
+  \item Integrated from 1 Hz to 10 GHz: total $119.5\ \mu$V$_{\rm rms}$, below the $120\ \mu$V$_{\rm rms}$ limit
+  \item Biquad 2 dominates (99.3 vs 66.3 $\mu$V$_{\rm rms}$); the noise is collected in the pass band
+\end{itemize}
+\centering\scriptsize\setlength\tabcolsep{2.5pt}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+$\mu$V$_{\rm rms}$ & $R_1$ & $R_3$ & $R_4$ & $R_5$ & Tot. \\
+\midrule
+Biquad 1 & 37.8 & 32.1 & 31.2 & 31.2 & 66.3 \\
+Biquad 2 & 30.0 & 55.2 & 53.6 & 55.2 & 99.3 \\
+\midrule
+Filter (rms sum) & \multicolumn{5}{c}{119.5} \\
+\bottomrule
+\end{tabular}
 \end{column}
-\begin{column}{0.32\textwidth}
-  \small
-  \begin{itemize}\setlength\itemsep{3mm}
-    \item The RMS noise voltage is obtained by taking the square root of the integrated noise power.
-    \item The initial design yields about twice the target noise power. As discussed, doubling the capacitances reduces it to the target level.
-    \item The final output noise is $119.4\ \mu$V$_{\rm rms}$.
-  \end{itemize}
+\begin{column}{0.54\textwidth}
 \end{column}
 \end{columns}
+\rightplot{figs/Noise_cumulative.png}
 \end{frame}
+
 
 % ---------- 8. Transient response at 100 kHz ----------
 \begin{frame}{Transient Response 100 kHz}
@@ -293,6 +469,49 @@
     \item Reducing the bandwidth creates a higher peak at the pass-band limit.
     \item Tested bandwidths: 100 MHz, 1 GHz, and 10 GHz.
   \end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begingroup
+\setbeamertemplate{background}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[pdred] (current page.south west) rectangle (current page.north east);
+  \end{tikzpicture}}
+\begin{frame}[plain]
+\centering
+\vfill
+  \includegraphics[width=65mm]{figs/unipd_logo.png}\par
+  \vspace{12mm}
+  {\color{white}\Huge\bfseries Thank you for your attention}
+  \vfill
+  \end{frame}
+\endgroup
+
+\appendix
+\begin{frame}{Backup: test bench of the complete filter}
+\centering\vspace{1mm}
+\figorbox{figs/filter_schematic_transparent.png}{100mm}{43mm}{Virtuoso: test bench, two biquads in cascade}
+\vspace{1.5mm}
+\begin{itemize}\setlength\itemsep{0.6mm}\scriptsize
+  \item Cascade of \texttt{lab1\_biquad1} and \texttt{lab1\_biquad2}, with common mode (CM) and substrate (SUB) connected
+  \item Input: DC source at the common mode plus a sine source (500 mV, frequency \texttt{f1})
+  \item Balun at input and output: \texttt{Vod} is the differential output, \texttt{Voc} the common-mode output
+  \item Common mode $=V_{DD}/2=0.5$ V ($V_{DD}=1$ V): it biases the amplifier correctly (0 V would switch it off) and is the zero-signal level, so the maximum amplitude is $V_{DD}/2$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Backup: noise transfer functions of the two biquads}
+\centering\vspace{2mm}
+\figorbox{figs/Noise_tf_bq1.png}{71mm}{44mm}{MATLAB: noise transfer functions, biquad 1}\hfill
+\figorbox{figs/Noise_tf_bq2.png}{71mm}{44mm}{MATLAB: noise transfer functions, biquad 2}
+\vspace{1mm}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\scriptsize Biquad 1 ($Q=0.72$): $R_1$, $R_3$ band-pass, $R_4$, $R_5$ low-pass
+\end{column}
+\begin{column}{0.48\textwidth}
+\scriptsize Biquad 2 ($Q=3.38$): peaks of about $+10$ dB $\approx 20\log Q$ on $R_3$, $R_4$, $R_5$
 \end{column}
 \end{columns}
 \end{frame}

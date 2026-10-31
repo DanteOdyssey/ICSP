@@ -35,6 +35,11 @@
     \node[anchor=north,inner sep=0] at ([xshift=0.333\paperwidth,yshift=-0.37\paperheight]current page.north west)
       {\includegraphics[width=0.60\paperwidth]{#1}};
   \end{tikzpicture}}
+\newcommand{\alignednoiseplotright}[1]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north,inner sep=0] at ([xshift=0.667\paperwidth,yshift=-0.37\paperheight]current page.north west)
+      {\includegraphics[width=0.60\paperwidth]{#1}};
+  \end{tikzpicture}}
 \newcommand{\rightplot}[1]{%
   \begin{tikzpicture}[remember picture,overlay]
     \node[inner sep=0] at ([xshift=110.5mm,yshift=36mm]current page.south west)
@@ -75,10 +80,6 @@
 % ---------- 2. Specs ----------
 \begin{frame}{Matlab Mathematical Result \& Specifications}
 \begin{columns}[T,onlytextwidth]
-\begin{column}{0.66\textwidth}
-  \centering
-  \includegraphics[width=\linewidth,height=0.84\textheight,keepaspectratio]{figs/filtro_completo.png}
-\end{column}
 \begin{column}{0.32\textwidth}
   \small
   \begin{itemize}\setlength\itemsep{1.5mm}
@@ -87,6 +88,10 @@
     \item In-band ripple $\le 0.5$ dB, stop-band attenuation $\ge 50$ dB
     \item Output noise $<120\ \mu$V$_{\rm rms}$
   \end{itemize}
+\end{column}
+\begin{column}{0.66\textwidth}
+  \centering
+  \includegraphics[width=\linewidth,height=0.84\textheight,keepaspectratio]{figs/filtro_completo.png}
 \end{column}
 \end{columns}
 \end{frame}
@@ -409,9 +414,6 @@ Filter (rms sum) & \multicolumn{5}{c}{119.5} \\
 % ---------- 8. Transient response at 100 kHz ----------
 \begin{frame}{Transient Response 100 kHz}
 \begin{columns}[T,onlytextwidth]
-\begin{column}{0.66\textwidth}
-  \alignednoiseplot{figs/output_transient_100k.png}
-\end{column}
 \begin{column}{0.32\textwidth}
   \small
   \begin{itemize}\setlength\itemsep{3mm}
@@ -421,15 +423,15 @@ Filter (rms sum) & \multicolumn{5}{c}{119.5} \\
       \[\resizebox{\linewidth}{!}{$\displaystyle A_{1,\mathrm{dB}}=20\log_{10}\!\left(\frac{A_{\mathrm{out}}}{A_{\mathrm{in}}}\right)=-0.43\,\mathrm{dB}$}\]
   \end{itemize}
 \end{column}
+\begin{column}{0.66\textwidth}
+  \alignednoiseplotright{figs/output_transient_100k.png}
+\end{column}
 \end{columns}
 \end{frame}
 
 % ---------- 9. Transient response at 1 MHz ----------
 \begin{frame}{Transient Response 1 MHz}
 \begin{columns}[T,onlytextwidth]
-\begin{column}{0.66\textwidth}
-  \alignednoiseplot{figs/output_transient_1M.png}
-\end{column}
 \begin{column}{0.32\textwidth}
   \small
   \begin{itemize}\setlength\itemsep{3mm}
@@ -438,15 +440,15 @@ Filter (rms sum) & \multicolumn{5}{c}{119.5} \\
       \[\resizebox{\linewidth}{!}{$\displaystyle A_{2,\mathrm{dB}}=20\log_{10}\!\left(\frac{A_{\mathrm{out}}}{A_{\mathrm{in}}}\right)=-0.63\,\mathrm{dB}$}\]
   \end{itemize}
 \end{column}
+\begin{column}{0.66\textwidth}
+  \alignednoiseplotright{figs/output_transient_1M.png}
+\end{column}
 \end{columns}
 \end{frame}
 
 % ---------- 10. Limited op-amp gain effects ----------
 \begin{frame}{Limited OPAMP gain effects}
 \begin{columns}[T,onlytextwidth]
-\begin{column}{0.66\textwidth}
-  \alignednoiseplot{figs/Vod_different_opamp_gains.png}
-\end{column}
 \begin{column}{0.32\textwidth}
   \small
   \begin{itemize}\setlength\itemsep{3mm}
@@ -454,21 +456,24 @@ Filter (rms sum) & \multicolumn{5}{c}{119.5} \\
     \item Tested gains: 100, 1k, and 10k.
   \end{itemize}
 \end{column}
+\begin{column}{0.66\textwidth}
+  \alignednoiseplotright{figs/Vod_different_opamp_gains.png}
+\end{column}
 \end{columns}
 \end{frame}
 
 % ---------- 11. Limited op-amp bandwidth effects ----------
 \begin{frame}{Limited OPAMP bandwidth effects}
 \begin{columns}[T,onlytextwidth]
-\begin{column}{0.66\textwidth}
-  \alignednoiseplot{figs/Vod_different_opamp_GBW.png}
-\end{column}
 \begin{column}{0.32\textwidth}
   \small
   \begin{itemize}\setlength\itemsep{3mm}
     \item Reducing the bandwidth creates a higher peak at the pass-band limit.
     \item Tested bandwidths: 100 MHz, 1 GHz, and 10 GHz.
   \end{itemize}
+\end{column}
+\begin{column}{0.66\textwidth}
+  \alignednoiseplotright{figs/Vod_different_opamp_GBW.png}
 \end{column}
 \end{columns}
 \end{frame}

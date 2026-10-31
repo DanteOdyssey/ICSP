@@ -1,0 +1,102 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% v1.0.0
+% lab-report-template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[twocolumn]{article}
+
+\input{style}
+
+\usepackage{csquotes}
+
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               HEADER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{
+    \vspace{-1cm}
+    \vspace{0.5cm}
+    \textbf{Integrated Circuit Designer in the job market}\\
+}
+\author{
+    {Lorenzo Tomba}
+}
+
+\date{October 2026}
+
+% Document begin
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                 BODY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Market Demand for IC Designers}
+
+The research on the demand for IC designers is not easy to conduct, since also it depends a lot on the specific place in which the analysis is made.
+
+In USA the demand for IC designers is predicted to grow in teh enxt years so much that would lead to a shortage of 23,000 designers by 2030. \cite{bcg_semiconductor_design}
+
+Also obviously the IC designers are spread in different roles that differ much one from another, for example digital/analog desinger, verification or layouter. \cite{sia_chip_design}
+In Europe, the European Chips Skills Academy (ECSA) also predics that every year will be needed 10800 new qualified designers in the industy, given by the retirement of some of the current workers and the growth of the sector. \cite{ecsa_skills_2025}
+
+Focussing on Italy, the problem is given both by the difficulty to translating academic preparation into industry-ready professionals, particularly in the area of advanced IC design and also to have workers with advanced skills. \cite{chipsit_strategic_plan}.
+
+In conclusion, the demand for IC designer is and will be high in the next years, both in USA, Europe and Italy. The problem is that the supply of qualified professionals is not enough to satisfy the demand.
+
+\section{Skills Required for IC Designers}
+
+In order to identify the skills most commonly required for IC designers, job descriptions are useful to analyze all the profencies that are useful directly in the industry. In general the skills are connected to the specific role that it is offered, typical roles are Digital, Analog, Verification, Layout and System designers.
+
+Extracting the skill from linekdin job offers we obtaint the table \ref{tab:ic_design_skills} that summarize the main skills required for each role.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{0.42\columnwidth} p{0.5\columnwidth}}
+        \hline
+        \textbf{Role} & \textbf{Main skills} \\
+        \hline
+        
+        Analog IC Designer &
+        Analog circuit design, CMOS, transistor-level design,
+        SPICE, circuit simulation, Cadence Virtuoso \\
+
+        Digital IC Designer &
+        Verilog, SystemVerilog, RTL design, digital logic,
+        microarchitecture, synthesis, timing analysis \\
+
+        Mixed-Signal IC Designer &
+        Analog and digital design, ADC/DAC, mixed-signal simulation,
+        Verilog/SystemVerilog, SPICE, Cadence Virtuoso \\
+
+        Verification Engineer &
+        SystemVerilog, UVM, simulation, functional verification,
+        assertions, coverage, debugging \\
+
+        Layout Engineer &
+        Analog/digital layout, Cadence Virtuoso, PDKs, DRC, LVS,
+        parasitic extraction, device matching \\
+
+        \hline
+    \end{tabular}
+    \centering
+    \caption{Main IC design roles and required skills}
+    \label{tab:ic_design_skills}
+    \renewcommand{\arraystretch}{1.15}
+\end{table}
+
+\section{Conclusion}
+
+The whole analysis shows not only that the demand for IC designers is high and it is expected to be at least like this for the next years, but also that it is required a lot of workers with an highly specific set of skills in order to be able to work in the industry. The problem is that the supply of qualified professionals is not enough to satisfy the demand.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%             BIBLIOGRAPHY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

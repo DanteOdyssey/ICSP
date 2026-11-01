@@ -344,6 +344,24 @@ Gain at 1 MHz [dB] & $+8.2$ & $+8.2$ \\
 \rightplot{figs/Vod_biquad2_with_markers.png}
 \end{frame}
 
+% ---------- 11b. Complete filter: Virtuoso, real components ----------
+\begin{frame}{Complete filter: Virtuoso, real components}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\textbf{\footnotesize Test bench}
+\begin{itemize}\setlength\itemsep{1mm}\small
+\item The two biquads in cascade, with the same amplifier model and real components
+\item Pass band: $-0.49$ dB at 1 MHz, within the 0.5 dB limit
+\item Notches at 2.24 MHz and 5.13 MHz, the zeros of the two biquads
+\item Stop band: the response stays at or below $-50$ dB (line H1)
+\end{itemize}
+\end{column}
+\begin{column}{0.60\textwidth}
+\end{column}
+\end{columns}
+\rightplot{figs/Vod_filter_with_markers.png}
+\end{frame}
+
 % ---------- 12. Noise power spectral density ----------
 \begin{frame}{Power Spectral Density of Noise}
 \noindent\makebox[\textwidth][c]{%
